@@ -4,5 +4,5 @@ import org.littletonrobotics.junction.AutoLog
 
 interface ArmIO {
     @AutoLog
-    open class ArmIOInputs
+    open class ArmIOInputs{}
 }
