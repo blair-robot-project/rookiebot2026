@@ -9,5 +9,6 @@ interface ManipIO {
         @JvmField var rightRollerVoltage = 0.0
     }
     fun updateInputs(inputs: ManipIOInputs) {}
+    fun setRollerVolt(voltage: Double)
 
 }
