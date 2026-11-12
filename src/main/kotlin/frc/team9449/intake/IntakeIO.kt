@@ -5,9 +5,8 @@ import org.littletonrobotics.junction.AutoLog
 interface IntakeIO {
     @AutoLog
     open class IntakeIOInputs {
-
     }
 
     fun updateInputs(inputs: IntakeIOInputs) {}      // Will need to override
 }
-}
+
