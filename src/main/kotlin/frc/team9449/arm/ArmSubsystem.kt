@@ -1,3 +1,5 @@
 package frc.team9449.arm
 
-class ArmSubsystem
+import edu.wpi.first.wpilibj2.command.SubsystemBase
+
+class ArmSubsystem(private val io: ArmIO) : SubsystemBase()
