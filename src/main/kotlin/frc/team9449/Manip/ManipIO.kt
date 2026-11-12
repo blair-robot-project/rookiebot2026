@@ -1,4 +1,11 @@
 package frc.team9449.Manip
 
-class ManipIO
-//Hello
+import org.littletonrobotics.junction.AutoLog
+
+interface ManipIO {
+    @AutoLog
+    open class ManipIOInputs {
+
+    }
+
+}
