@@ -1,3 +1,12 @@
 package frc.team9449.intake
 
-interface IntakeIO
+interface IntakeIO {
+    @AutoLog
+    open class IntakeIOInputs {
+
+    }
+
+    fun updateInputs(inputs: IntakeIOInputs) {}
+
+}
+}
