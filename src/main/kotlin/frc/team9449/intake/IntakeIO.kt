@@ -6,7 +6,6 @@ interface IntakeIO {
 
     }
 
-    fun updateInputs(inputs: IntakeIOInputs) {}
-
+    fun updateInputs(inputs: IntakeIOInputs) {}      //Will need to override
 }
 }
