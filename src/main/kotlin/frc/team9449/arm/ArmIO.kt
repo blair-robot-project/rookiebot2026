@@ -1,8 +1,8 @@
 package frc.team9449.arm
 
-interface ArmIO{
+import org.littletonrobotics.junction.AutoLog
 
-    open class ArmIOInputs{
-
-    }
+interface ArmIO {
+    @AutoLog
+    open class ArmIOInputs
 }
