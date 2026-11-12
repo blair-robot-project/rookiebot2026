@@ -1,3 +1,8 @@
 package frc.team9449.arm
 
-class ArmIO
+interface ArmIO{
+
+    open class ArmIOInputs{
+
+    }
+}
