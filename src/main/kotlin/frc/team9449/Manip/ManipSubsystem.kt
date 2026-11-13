@@ -1,6 +1,6 @@
 package frc.team9449.Manip
 
-class ManipSubsystem(private val io: ManipIO) : SubsystemBase(){
+import edu.wpi.first.wpilibj2.command.SubsystemBase
 
-}
-//Hello
+class ManipSubsystem(private val io: ManipIO) : SubsystemBase()
+// Hello
