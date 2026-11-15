@@ -8,6 +8,9 @@ interface VisionIO {
         var timestampSeconds = 0.0
         var tagCount = 0
         var avgTagDistMeters = 0.0
+        var tagsSeen = mutableListOf<Int>()
+        var latestTagSeen = tagCount
+        var estimatedPose = Array<Int>(6)
 
         override fun toLog(table: LogTable) {
             table.put("Connected", connected)
