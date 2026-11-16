@@ -10,8 +10,6 @@ import java.lang.String
 import java.nio.ByteBuffer
 
 interface VisionIO {
-    @AutoLog...
-
 }
 
 data class TargetObservations(
