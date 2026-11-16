@@ -1,0 +1,75 @@
+package frc.team449.subsystems.vision
+
+import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Pose3d
+import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.util.struct.Struct
+import edu.wpi.first.util.struct.StructSerializable
+import org.littletonrobotics.junction.AutoLog
+import java.lang.String
+import java.nio.ByteBuffer
+
+interface VisionIO {
+}
+
+data class TargetObservations(
+    val x_rot: Rotation2d,
+    val y_rot: Rotation2d
+) {
+
+}
+
+
+data class PoseObservations(
+    val pose: Pose3d,
+    val timestamp: Double,
+    val ambiguity: Double,
+    val tagCount: Int,
+    val avgTagDist: Double,
+    val obsType: PoseObservationType
+) : StructSerializable {
+    companion object {
+        @JvmField
+        val struct: Struct<PoseObservations> = object : Struct<PoseObservations> {
+            override fun getTypeClass() : Class<PoseObservations> {
+                return PoseObservations::class.java
+            }
+
+            override fun getTypeName(): kotlin.String {
+                return "PoseObservations"
+            }
+
+            override fun getSize(): Int {
+                return Rotation2d.struct.size
+            }
+
+            override fun getSchema(): kotlin.String {
+                return "Pose3d pose;Double timestamp;Double ambiguity;Int tagCount;Double avgTagDist;PoseObservationType obsType"
+            }
+
+            override fun pack(byteBuffer: ByteBuffer, value: PoseObservations) {
+                byteBuffer.putDouble(value.timestamp)
+                byteBuffer.putDouble(value.ambiguity)
+                byteBuffer.putDouble(value.avgTagDist)
+                byteBuffer.putInt(value.tagCount)
+                Pose3d.struct.pack(byteBuffer, value.pose)
+            }
+
+            override fun unpack(byteBuffer: ByteBuffer) : PoseObservations {
+                val newTimeStamp = byteBuffer.getDouble()
+                val newamgibuity = byteBuffer.getDouble()
+                val newavgTagDist = byteBuffer.getDouble()
+                val newtagCount = byteBuffer.getInt()
+                val newpose = Pose3d.struct.unpack(byteBuffer)
+                return PoseObservations(newpose, newTimeStamp, newamgibuity, newtagCount, newavgTagDist, PoseObservationType.PHOTONVISION)
+            }
+        }
+    }
+}
+
+enum class PoseObservationType {
+    MEGATAG1,
+    MEGATAG2,
+    PHOTONVISION
+}
+
