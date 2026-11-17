@@ -4,4 +4,5 @@ class IntakeIOHardware(MOTOR_ID: Int) : IntakeIO {
     override fun updateInputs(inputs: IntakeIO.IntakeIOInputs) {
         // Add inputs later
     }
+    companion object {}
 }
