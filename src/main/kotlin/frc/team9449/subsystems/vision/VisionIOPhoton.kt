@@ -1,4 +1,4 @@
-package frc.team9449.vision
+package frc.team9449.subsystems.vision
 
 import edu.wpi.first.math.geometry.Pose3d
 
