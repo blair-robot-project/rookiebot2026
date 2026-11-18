@@ -1,5 +1,2 @@
 package frc.team9449.intake
-
-class IntakeIOSim: IntakeIOHardware() {
-
-}
+class IntakeIOSim : IntakeIOHardware()
