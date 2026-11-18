@@ -10,6 +10,12 @@ import java.lang.String
 import java.nio.ByteBuffer
 
 interface VisionIO {
+    fun periodic() {
+        @AutoLog
+        open class VisionIOInputs {
+            fun updateInputs(inputs: VisionIOInputs) {}
+        }
+    }
 }
 
 data class TargetObservations(
