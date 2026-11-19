@@ -9,4 +9,7 @@ class Robot : LoggedRobot() {
     override fun teleopInit() {
         // Same again, blame Danny
     }
+    override fun autonomousPeriodic() {
+        // Ditto
+    }
 }
