@@ -18,7 +18,8 @@ class BLineRoutines {
         FollowPath.setPoseLoggingConsumer { value -> Logger.recordOutput(value.getFirst(), value.getSecond())}
         FollowPath.setTranslationListLoggingConsumer { value -> Logger.recordOutput(value.getFirst().toString(), value.getSecond().contentToString())}
     }
-
-
-
+    init {
+        connectToAdvantageScope()
+    }
+    
 }
