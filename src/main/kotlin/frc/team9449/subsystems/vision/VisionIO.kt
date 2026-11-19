@@ -6,17 +6,18 @@ import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.util.struct.Struct
 import edu.wpi.first.util.struct.StructSerializable
 import org.littletonrobotics.junction.AutoLog
-import java.lang.String
 import java.nio.ByteBuffer
 
 interface VisionIO {
-    fun periodic() {
-        @AutoLog
-        open class VisionIOInputs {
-            fun updateInputs(inputs: VisionIOInputs) {}
+    @AutoLog
+    open class VisionIOInputs {
+        @JvmField var connected: Boolean = false
+        @JvmField var latestTargetObservations: TargetObservations = TargetObservations(Rotation2d.kZero, Rotation2d.kZero)
+        @JvmField var poseObservations: Array<PoseObservations> = emptyArray()
+        @JvmField var tagIds = IntArray(0)
         }
+    fun updateInputs(inputs: VisionIOInputs) {}
     }
-}
 
 data class TargetObservations(
     val x_rot: Rotation2d,
