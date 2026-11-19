@@ -1,3 +1,7 @@
 package frc.team9449
 
-class Robot
+class Robot {
+    override fun teleopPeriodic() {
+        // help
+    }
+}
