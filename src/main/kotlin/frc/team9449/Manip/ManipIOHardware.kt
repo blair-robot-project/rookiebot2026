@@ -4,6 +4,7 @@ import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.util.Units
+import edu.wpi.first.units.measure.Voltage
 
 open class ManipIOHardware(): ManipIO{
     val rollerMotorID = 1
@@ -21,7 +22,7 @@ open class ManipIOHardware(): ManipIO{
     }
 
     override fun setRollerVolt(voltage: Double) {
-        TODO("Not yet implemented")
+        setRollerVolt(voltage)
     }
 
     override fun setWristAngle(angle: Double) {
