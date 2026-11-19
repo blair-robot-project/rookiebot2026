@@ -9,14 +9,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 import java.util.function.DoubleSupplier
 
-
 // Make a DriveSubsystem class with four ModuleIO's as parameters.
 class DriveSubsystem(
     private val ioFL: SwerveIO,
     private val ioFR: SwerveIO,
     private val ioBL: SwerveIO,
-    private val ioBR: SwerveIO,
-): SubsystemBase() {
+    private val ioBR: SwerveIO
+) : SubsystemBase() {
     /**
      * Init Static
      * This just show Robot Information and Init System information.
@@ -33,40 +32,42 @@ class DriveSubsystem(
      * */
 
     // When you initialize the class, make 4 ModuleIOInputsAutoLogged.
-    private val inputsFL: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged();
-    private val inputsFR: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged();
-    private val inputsBL: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged();
-    private val inputsBR: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged();
+    private val inputsFL: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged()
+    private val inputsFR: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged()
+    private val inputsBL: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged()
+    private val inputsBR: SwerveIOInputsAutoLogged = SwerveIOInputsAutoLogged()
 
     // EDIT ME!
-    val width = 2934.3;
-    val length = 1293.3;
+    val width = 2934.3
+    val length = 1293.3
 
     // see location of each wheel from Center of the car.
-    val locFL = Translation2d(width / 2, length / 2);
-    val locFR = Translation2d(-width /2, length/2);
-    val locBL = Translation2d(width /2, -length/2);
-    val locBR = Translation2d(-width /2, -length/2);
+    val locFL = Translation2d(width / 2, length / 2)
+    val locFR = Translation2d(-width / 2, length / 2)
+    val locBL = Translation2d(width / 2, -length / 2)
+    val locBR = Translation2d(-width / 2, -length / 2)
 
     // enter kinematics
     val kinematics = SwerveDriveKinematics(
-        locFL, locFR, locBL, locBR
-    );
-
+        locFL,
+        locFR,
+        locBL,
+        locBR
+    )
 
     // about PIDs.
-    val setKP = 0.1;
-    val setKI = 0.1;
-    val setKD = 0.1;
+    val setKP = 0.1
+    val setKI = 0.1
+    val setKD = 0.1
 
-    val drivePIDFL: PIDController = PIDController(setKP, setKI, setKD);
-    val drivePIDFR: PIDController = PIDController(setKP, setKI, setKD);
-    val drivePIDBL: PIDController = PIDController(setKP, setKI, setKD);
-    val drivePIDBR: PIDController = PIDController(setKP, setKI, setKD);
-    val turnPIDFL: PIDController = PIDController(setKP, setKI, setKD);
-    val turnPIDFR: PIDController = PIDController(setKP, setKI, setKD);
-    val turnPIDBL: PIDController = PIDController(setKP, setKI, setKD);
-    val turnPIDBR: PIDController = PIDController(setKP, setKI, setKD);
+    val drivePIDFL: PIDController = PIDController(setKP, setKI, setKD)
+    val drivePIDFR: PIDController = PIDController(setKP, setKI, setKD)
+    val drivePIDBL: PIDController = PIDController(setKP, setKI, setKD)
+    val drivePIDBR: PIDController = PIDController(setKP, setKI, setKD)
+    val turnPIDFL: PIDController = PIDController(setKP, setKI, setKD)
+    val turnPIDFR: PIDController = PIDController(setKP, setKI, setKD)
+    val turnPIDBL: PIDController = PIDController(setKP, setKI, setKD)
+    val turnPIDBR: PIDController = PIDController(setKP, setKI, setKD)
 
     /**
      * Init
@@ -102,7 +103,7 @@ class DriveSubsystem(
         } else {
             turnPIDFL.calculate(inputsFL.angleTurn.radians)
         }
-        
+
         if (drivePIDFL.atSetpoint()) {
             ioFL.updateAppliedVoltageTurn(0.0)
         } else {
@@ -144,8 +145,6 @@ class DriveSubsystem(
         } else {
             drivePIDBR.calculate(inputsBR.velocityDrive)
         }
-
-
     }
 
     /**
@@ -153,24 +152,24 @@ class DriveSubsystem(
      * */
 
     // Make a command to set the speeds of the modules with parameters for the forward speed, sideways speed, and rotation speed, all as DoubleSuppliers.
-    fun updateSystem (
+    fun updateSystem(
         forward: DoubleSupplier,
         sideways: DoubleSupplier,
         rotation: DoubleSupplier
     ): Command =
-        runOnce  {
-            val driveForward = forward.asDouble;
-            val driveSideways = sideways.asDouble;
-            val driveRotation = rotation.asDouble;
+        runOnce {
+            val driveForward = forward.asDouble
+            val driveSideways = sideways.asDouble
+            val driveRotation = rotation.asDouble
 
             // Use the kinematics calculator to convert this to module states.
             val speedInformation = ChassisSpeeds(
                 driveForward,
                 driveSideways,
                 driveRotation
-            );
+            )
 
-            val moduleStates = kinematics.toSwerveModuleStates(speedInformation);
+            val moduleStates = kinematics.toSwerveModuleStates(speedInformation)
 
             // apply states
             val velocityFL = moduleStates[0].speedMetersPerSecond
