@@ -20,6 +20,4 @@ class IndexerIOSubsystem(private val io: IndexerIO) : SubsystemBase() {
         io.setVoltage(0.0)
     }
 
-    val beamBreakTripped: Boolean
-        get() = inputs.beamBreakTripped
 }
