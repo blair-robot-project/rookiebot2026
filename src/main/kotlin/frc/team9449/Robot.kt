@@ -1,7 +1,8 @@
 package frc.team9449
+import org.littletonrobotics.junction.LoggedRobot
 
-class Robot {
+class Robot : LoggedRobot() {
     override fun teleopPeriodic() {
-        // help
+        // yay it works
     }
 }
