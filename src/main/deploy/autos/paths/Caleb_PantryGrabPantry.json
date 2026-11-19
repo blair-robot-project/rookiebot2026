@@ -1,0 +1,149 @@
+{
+  "path_elements": [
+    {
+      "type": "waypoint",
+      "translation_target": {
+        "x_meters": 1.91299,
+        "y_meters": 7.08164,
+        "intermediate_handoff_radius_meters": 0.45,
+        "handoff_radius_source": "auto"
+      },
+      "rotation_target": {
+        "rotation_radians": 1.58379,
+        "profiled_rotation": true
+      }
+    },
+    {
+      "type": "event_trigger",
+      "t_ratio": 0.0,
+      "lib_key": "<PUT AWAY BOTH CARROTS (temp)>"
+    },
+    {
+      "type": "rotation",
+      "rotation_radians": 0.0,
+      "t_ratio": 0.53859,
+      "profiled_rotation": true
+    },
+    {
+      "type": "waypoint",
+      "translation_target": {
+        "x_meters": 5.61852,
+        "y_meters": 4.68874,
+        "intermediate_handoff_radius_meters": 1.415,
+        "handoff_radius_source": "auto"
+      },
+      "rotation_target": {
+        "rotation_radians": 0.0,
+        "profiled_rotation": true
+      }
+    },
+    {
+      "type": "event_trigger",
+      "t_ratio": 0.0,
+      "lib_key": "<PICK UP CARROT (temp)>"
+    },
+    {
+      "type": "rotation",
+      "rotation_radians": -3.11839,
+      "t_ratio": 0.69543,
+      "profiled_rotation": true
+    },
+    {
+      "type": "translation",
+      "x_meters": 6.98475,
+      "y_meters": 4.7096,
+      "intermediate_handoff_radius_meters": 0.584,
+      "handoff_radius_source": "auto"
+    },
+    {
+      "type": "translation",
+      "x_meters": 6.35732,
+      "y_meters": 3.64101,
+      "intermediate_handoff_radius_meters": 0.299,
+      "handoff_radius_source": "auto"
+    },
+    {
+      "type": "event_trigger",
+      "t_ratio": 1.0,
+      "lib_key": "<PICK UP CARROT (temp)>"
+    },
+    {
+      "type": "waypoint",
+      "translation_target": {
+        "x_meters": 5.64166,
+        "y_meters": 3.56258,
+        "intermediate_handoff_radius_meters": 0.351,
+        "handoff_radius_source": "auto"
+      },
+      "rotation_target": {
+        "rotation_radians": -3.11839,
+        "profiled_rotation": true
+      }
+    },
+    {
+      "type": "rotation",
+      "rotation_radians": 1.52665,
+      "t_ratio": 0.60553,
+      "profiled_rotation": true
+    },
+    {
+      "type": "event_trigger",
+      "t_ratio": 1.0,
+      "lib_key": "<PUT AWAY BOTH CARROTS (temp)>"
+    },
+    {
+      "type": "waypoint",
+      "translation_target": {
+        "x_meters": 1.92007,
+        "y_meters": 7.09581,
+        "intermediate_handoff_radius_meters": 0.935,
+        "handoff_radius_source": "auto"
+      },
+      "rotation_target": {
+        "rotation_radians": 1.58854,
+        "profiled_rotation": true
+      }
+    }
+  ],
+  "tank_drive_direction": "forward",
+  "constraints": {
+    "max_velocity_meters_per_sec": [
+      {
+        "value": 2.35,
+        "start_ordinal": 0,
+        "end_ordinal": 0,
+        "source": "auto_velocity"
+      },
+      {
+        "value": 4.7,
+        "start_ordinal": 1,
+        "end_ordinal": 1,
+        "source": "auto_velocity"
+      },
+      {
+        "value": 1.83,
+        "start_ordinal": 2,
+        "end_ordinal": 2,
+        "source": "auto_velocity"
+      },
+      {
+        "value": 2.23,
+        "start_ordinal": 3,
+        "end_ordinal": 3,
+        "source": "auto_velocity"
+      },
+      {
+        "value": 1.5,
+        "start_ordinal": 4,
+        "end_ordinal": 4,
+        "source": "auto_velocity"
+      },
+      {
+        "value": 4.7,
+        "start_ordinal": 5,
+        "end_ordinal": 5,
+        "source": "auto_velocity"
+      }
+    ]
+  }
+}
