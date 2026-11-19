@@ -6,4 +6,7 @@ class Robot : LoggedRobot() {
     override fun teleopPeriodic() {
         // Danny Liddel said this was enough so if anything blows up you can blame him.
     }
+    override fun teleopInit() {
+        // Same again, blame Danny
+    }
 }
