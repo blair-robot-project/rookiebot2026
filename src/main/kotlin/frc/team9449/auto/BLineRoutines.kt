@@ -2,6 +2,8 @@ package frc.team9449.auto
 import com.ctre.phoenix6.swerve.SwerveRequest
 import frc.robot.lib.BLine.FollowPath;
 import edu.wpi.first.math.controller.PIDController
+import edu.wpi.first.wpilibj2.command.Command
+import edu.wpi.first.wpilibj2.command.Commands
 import org.littletonrobotics.junction.Logger;
 
 
@@ -20,6 +22,18 @@ class BLineRoutines {
     }
     init {
         connectToAdvantageScope()
+    }
+
+    private fun score4oven(): Command {
+        //builderReset
+        //builderRegular
+        return Commands.sequence(
+            //align drive modules
+            //score in oven
+            //builderReset.build(Path("emily_4oven.json"))
+            //start intake and stop intake event triggers
+            //score in oven x2
+        )
     }
     
 }
