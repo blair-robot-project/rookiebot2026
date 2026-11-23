@@ -1,9 +1,11 @@
 package frc.team9449.intake
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration
 import com.revrobotics.RelativeEncoder
 import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
-import edu.wpi.first.units.Units
+import com.revrobotics.spark.config.SparkBaseConfig
+import com.revrobotics.spark.config.SparkMaxConfig
 
 
 class IntakeIOHardware(ROLLER_ID: Int, PIVOT_ID1: Int, PIVOT_ID2: Int) : IntakeIO {
@@ -26,5 +28,20 @@ class IntakeIOHardware(ROLLER_ID: Int, PIVOT_ID1: Int, PIVOT_ID2: Int) : IntakeI
     override fun setRollerVolt(volt: Double) {
         rollerMotor.setVoltage(volt)
     }
-    companion object {}
+
+    companion object {
+        // talonfxconfiguration().apply {}
+        var rollerConfig = SparkMaxConfig()
+            .inverted(false)
+            .idleMode(SparkBaseConfig.IdleMode.kCoast)
+            .smartCurrentLimit(50)
+        var pivot1Config = SparkMaxConfig()
+            .inverted(false)
+            .idleMode(SparkBaseConfig.IdleMode.kCoast)
+            .smartCurrentLimit(50)
+        var pivot2Config = SparkMaxConfig()
+            .inverted(false)
+            .idleMode(SparkBaseConfig.IdleMode.kCoast)
+            .smartCurrentLimit(50)
+    }
 }
