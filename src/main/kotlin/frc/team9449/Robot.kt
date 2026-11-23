@@ -12,4 +12,8 @@ class Robot : LoggedRobot() {
     override fun autonomousPeriodic() {
         // Ditto
     }
+    // I was also told to do the rest of the functions so here we are??? I'm lost :|
+    override fun robotInit() {}
+    override fun robotPeriodic() {}
+    override fun autonomousInit() {}
 }
