@@ -21,7 +21,10 @@ class IntakeIOHardware(ROLLER_ID: Int, PIVOT_ID1: Int, PIVOT_ID2: Int) : IntakeI
     var pivotEncoder2: RelativeEncoder = pivotMotor2.getEncoder()
 
     override fun setPivotPos(pos: Double) {
-
+        
+    }
+    override fun setRollerVolt(volt: Double) {
+        rollerMotor.setVoltage(volt)
     }
     companion object {}
 }

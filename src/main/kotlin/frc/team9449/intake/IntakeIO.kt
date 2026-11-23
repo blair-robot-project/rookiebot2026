@@ -15,4 +15,5 @@ interface IntakeIO {
 
     fun updateInputs(inputs: IntakeIOInputs) {} // Will need to override
     fun setPivotPos(pos: Double) {}
+    fun setRollerVolt(volt: Double) {}
 }
