@@ -1,3 +1,5 @@
 package frc.team9449
 
-object Constants
+object VisionConstants {
+    
+}

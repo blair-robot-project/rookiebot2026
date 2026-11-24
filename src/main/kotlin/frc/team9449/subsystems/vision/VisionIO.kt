@@ -11,6 +11,7 @@ import java.nio.ByteBuffer
 interface VisionIO {
     @AutoLog
     open class VisionIOInputs {
+        lateinit var latestTargetObservationa: Rotation2d
         @JvmField var connected: Boolean = false
         @JvmField var latestTargetObservations: TargetObservations = TargetObservations(Rotation2d.kZero, Rotation2d.kZero)
         @JvmField var poseObservations: Array<PoseObservations> = emptyArray()
@@ -22,8 +23,39 @@ interface VisionIO {
 data class TargetObservations(
     val x_rot: Rotation2d,
     val y_rot: Rotation2d
-) {
+) : StructSerializable {
+    companion object {
+        @JvmField
+        val struct: Struct<TargetObservations> = object : Struct<TargetObservations> {
+            override fun getTypeClass(): Class<TargetObservations> {
+                return TargetObservations::class.java
+            }
 
+            override fun getTypeName(): kotlin.String {
+                return "TargetObservations"
+            }
+
+            override fun getSize(): Int {
+                return Rotation2d.struct.size
+            }
+
+            override fun getSchema(): kotlin.String {
+                return "Double x_rotation;Double y_rotation"
+            }
+
+            override fun pack(buffer: ByteBuffer, value: TargetObservations) {
+                Rotation2d.struct.pack(buffer, value.x_rot)
+                Rotation2d.struct.pack(buffer, value.y_rot)
+            }
+
+            override fun unpack(buffer: ByteBuffer): TargetObservations {
+                val new_X_ROT = Rotation2d.struct.unpack(buffer)
+                val new_Y_ROT = Rotation2d.struct.unpack(buffer)
+                return TargetObservations(new_X_ROT, new_Y_ROT)
+            }
+
+        }
+    }
 }
 
 
@@ -54,12 +86,12 @@ data class PoseObservations(
                 return "Pose3d pose;Double timestamp;Double ambiguity;Int tagCount;Double avgTagDist;PoseObservationType obsType"
             }
 
-            override fun pack(byteBuffer: ByteBuffer, value: PoseObservations) {
-                byteBuffer.putDouble(value.timestamp)
-                byteBuffer.putDouble(value.ambiguity)
-                byteBuffer.putDouble(value.avgTagDist)
-                byteBuffer.putInt(value.tagCount)
-                Pose3d.struct.pack(byteBuffer, value.pose)
+            override fun pack(buffer: ByteBuffer, value: PoseObservations) {
+                buffer.putDouble(value.timestamp)
+                buffer.putDouble(value.ambiguity)
+                buffer.putDouble(value.avgTagDist)
+                buffer.putInt(value.tagCount)
+                Pose3d.struct.pack(buffer, value.pose)
             }
 
             override fun unpack(byteBuffer: ByteBuffer) : PoseObservations {
