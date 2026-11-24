@@ -1,3 +1,13 @@
 package frc.team9449
 
-object Constants
+import edu.wpi.first.wpilibj.RobotBase
+
+object Constants {
+    enum class Mode {
+        REAL,
+        SIM,
+        REPLAY
+    }
+
+    val CURRENT_MODE: Mode = if (RobotBase.isReal()) Mode.REAL else Mode.SIM
+}

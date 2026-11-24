@@ -17,7 +17,7 @@ interface IndexerIO {
 
         @JvmField var beamBreakTripped: Boolean = false
 
-        @JvmField var connected: Boolean = false
+        @JvmField var LaserCANConnected: Boolean = false
     }
     fun updateInputs(inputs: IndexerIOInputs) {}
     fun setVoltage(volts: Double) {}
