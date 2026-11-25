@@ -7,6 +7,8 @@ import edu.wpi.first.math.geometry.Transform3d
 import frc.team449.subsystems.vision.PoseObservations
 import frc.team449.subsystems.vision.TargetObservations
 import frc.team449.subsystems.vision.VisionIO
+import frc.team449.subsystems.vision.VisionIOLimelight
+import frc.team9449.VisionConstants
 import org.photonvision.PhotonCamera
 
 open class VisionIOPhoton(Name: String, val Offset: Transform3d) : VisionIO {
@@ -47,6 +49,10 @@ open class VisionIOPhoton(Name: String, val Offset: Transform3d) : VisionIO {
                     tags.add(target.fiducialId)
                 }
                 val avgDist = sum/(result.targets.size)
+            } else if (result.targets.isNotEmpty()) {
+                val target = result.targets[0]
+
+                val pose = VisionConstants.REBUILT_FIELD_LAYOUT.getTagPose(target.fiducialId)
             }
         }
     }
