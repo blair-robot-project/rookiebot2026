@@ -11,7 +11,6 @@ import java.nio.ByteBuffer
 interface VisionIO {
     @AutoLog
     open class VisionIOInputs {
-        lateinit var latestTargetObservationa: Rotation2d
         @JvmField var connected: Boolean = false
         @JvmField var latestTargetObservations: TargetObservations = TargetObservations(Rotation2d.kZero, Rotation2d.kZero)
         @JvmField var poseObservations: Array<PoseObservations> = emptyArray()

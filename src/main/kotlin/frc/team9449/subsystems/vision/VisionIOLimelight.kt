@@ -66,6 +66,10 @@ class VisionIOLimelight(
                     PoseObservationType.MEGATAG2,
                 )
             )
+        } else {
+            inputs.connected = false
+            inputs.poseObservations = emptyArray()
+        }
 
             if (visionEstimate.isPresent) {
                 val results = visionEstimate.get()
@@ -75,19 +79,17 @@ class VisionIOLimelight(
 
                     inputs.latestTargetObservations = TargetObservations(X_ROT, Y_ROT)
                     val ListofIDs = mutableSetOf<Int>()
-                    for (i in results.targets_Fiducials) {
-                        ListofIDs.add(i.fiducialID.toInt())
+                    for (target in results.targets_Fiducials) {
+                        ListofIDs.add(target.fiducialID.toInt())
                     }
                     inputs.tagIds = ListofIDs.toIntArray()
                 } else {
-                    inputs.latestTargetObservationa = Rotation2d(0.0, 0.0)
+                    inputs.latestTargetObservations = TargetObservations(Rotation2d.kZero, Rotation2d.kZero)
                     inputs.tagIds = IntArray(0)
                 }
+            } else {
+                inputs.connected = false
+                inputs.poseObservations = emptyArray()
             }
-
-        } else {
-            inputs.connected = false
-            inputs.poseObservations = emptyArray()
         }
     }
-}
