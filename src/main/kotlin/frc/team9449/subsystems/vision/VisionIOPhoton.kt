@@ -4,6 +4,7 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Pose3d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.geometry.Transform3d
+import frc.team449.subsystems.vision.PoseObservationType
 import frc.team449.subsystems.vision.PoseObservations
 import frc.team449.subsystems.vision.TargetObservations
 import frc.team449.subsystems.vision.VisionIO
@@ -49,10 +50,32 @@ open class VisionIOPhoton(Name: String, val Offset: Transform3d) : VisionIO {
                     tags.add(target.fiducialId)
                 }
                 val avgDist = sum/(result.targets.size)
+
+                pose_observations.add(
+                    PoseObservations(
+                        robotPose,
+                        result.timestampSeconds,
+                        multiTagResult.estimatedPose.ambiguity,
+                        multiTagResult.fiducialIDsUsed.size,
+                        avgDist,
+                        PoseObservationType.PHOTONVISION
+                    )
+                )
+
             } else if (result.targets.isNotEmpty()) {
                 val target = result.targets[0]
 
                 val pose = VisionConstants.REBUILT_FIELD_LAYOUT.getTagPose(target.fiducialId)
+
+                if (pose.isPresent) {
+                    val robotToCamera = Offset
+                    val cameraToRobot = robotToCamera.inverse()
+                    val fieldToCamera: Transform3d = target.bestCameraToTarget
+                    val fieldToRobot = fieldToCamera.plus(cameraToRobot)
+                    val robotPose = Pose3d(fieldToRobot.translation, fieldToRobot.rotation)
+
+                    tags.add(target.fiducialId)
+                }
             }
         }
     }
