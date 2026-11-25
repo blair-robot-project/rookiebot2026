@@ -74,13 +74,14 @@ class VisionIOLimelight(
                     val Y_ROT = Rotation2d.fromDegrees(results.targets_Fiducials[0].ty)
 
                     inputs.latestTargetObservations = TargetObservations(X_ROT, Y_ROT)
-                    var listofids = mutableSetOf<Int>()
+                    val ListofIDs = mutableSetOf<Int>()
                     for (i in results.targets_Fiducials) {
-                        listofids.add(i.fiducialID.toInt())
+                        ListofIDs.add(i.fiducialID.toInt())
                     }
-                    inputs.tagIds = listofids.toIntArray()
+                    inputs.tagIds = ListofIDs.toIntArray()
                 } else {
                     inputs.latestTargetObservationa = Rotation2d(0.0, 0.0)
+                    inputs.tagIds = IntArray(0)
                 }
             }
 
