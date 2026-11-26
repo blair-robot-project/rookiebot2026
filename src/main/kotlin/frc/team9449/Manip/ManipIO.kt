@@ -9,9 +9,7 @@ interface ManipIO {
 
         @JvmField var rollerVelo = 0.0
 
-        @JvmField var wristAngle = Rotation2d()
     }
     fun updateInputs(inputs: ManipIOInputs) {}
     fun setRollerVolt(voltage: Double)
-    fun setWristAngle(angle: Double)
 }

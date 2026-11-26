@@ -17,19 +17,9 @@ class ManipIOSim: ManipIOHardware() {
             ),
             DCMotor.getNEO(1),
     )
-    val wristMotorSim: DCMotorSim =
-        DCMotorSim(
-            LinearSystemId.createDCMotorSystem(
-                DCMotor.getNEO(1),
-                0.0, //Change this later
-                0.0, //Change this later
-            ),
-            DCMotor.getNEO(1),
-        )
     override fun updateInputs(inputs: ManipIO.ManipIOInputs) {
         inputs.rollerVelo = rollerMotorSim.angularVelocityRadPerSec
         inputs.rollerVoltage = rollerMotorSim.inputVoltage
-        inputs.wristAngle = Rotation2d(rollerMotorSim.angularPositionRad)
 
 
     }
