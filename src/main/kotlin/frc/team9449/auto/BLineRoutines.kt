@@ -20,6 +20,8 @@ class BLineRoutines {
         translationController,
         rotationController,
         crosstrackController).withDefaultShouldFlip()
+    private val intake = IntakeIO()
+    private val lift = ArmIO()
 
 
     fun connectToAdvantageScope() {
@@ -31,8 +33,18 @@ class BLineRoutines {
 
     init {
         connectToAdvantageScope()
+        registerEventTriggers()
     }
+    private fun registerEventTriggers() {
 
+            FollowPath.registerEventTrigger("intakeOn", intake.onCo mand())
+            FollowPath.registerEventTrigger("intakeOff", intake.offCommand())
+
+            FollowPath.registerEventTrigger("liftL1", lift.level1Command())
+            FollowPath.registerEventTrigger("liftL2", lift.level2Command())
+            FollowPath.registerEventTrigger("liftL3", lift.level3Command())
+
+    }
     private fun twoplustwo(): Command {
         // builderReset
         // builderRegular
