@@ -1,6 +1,7 @@
 package frc.team9449.auto
 import com.ctre.phoenix6.swerve.SwerveRequest
 import edu.wpi.first.math.controller.PIDController
+import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import frc.robot.lib.BLine.FollowPath
@@ -10,8 +11,16 @@ class BLineRoutines {
     private val rotationController = PIDController(1.0, 0.0, 1.0)
     private val translationController = PIDController(2.0, 0.0, 0.0)
     private val crosstrackController = PIDController(0.2, 0.0, 0.0)
-
     private val applyRobotSpeeds = SwerveRequest.ApplyRobotSpeeds()
+    private val builder = FollowPath.Builder(
+        placeholder,
+        placeholder,
+        placeholder,
+        {speeds: ChassisSpeeds ->driveSubsystem.setControl(applyRobotSpeeds.withSpeeds(speeds))},
+        translationController,
+        rotationController,
+        crosstrackController).withDefaultShouldFlip()
+
 
     fun connectToAdvantageScope() {
         FollowPath.setDoubleLoggingConsumer { value -> Logger.recordOutput(value.getFirst(), value.getSecond()) }
@@ -19,6 +28,7 @@ class BLineRoutines {
         FollowPath.setPoseLoggingConsumer { value -> Logger.recordOutput(value.getFirst(), value.getSecond()) }
         FollowPath.setTranslationListLoggingConsumer { value -> Logger.recordOutput(value.getFirst().toString(), value.getSecond().contentToString()) }
     }
+
     init {
         connectToAdvantageScope()
     }
