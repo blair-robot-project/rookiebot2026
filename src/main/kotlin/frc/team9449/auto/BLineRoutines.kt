@@ -9,21 +9,20 @@ import frc.robot.lib.BLine.FollowPath
 import org.littletonrobotics.junction.Logger
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
-class BLineRoutines {
+class BLineRoutines(private val drive: DriveSubsystem,  private val manip: ManipSubsystem, private val arm: ArmSubsystem){
     private val rotationController = PIDController(1.0, 0.0, 1.0)
     private val translationController = PIDController(2.0, 0.0, 0.0)
     private val crosstrackController = PIDController(0.2, 0.0, 0.0)
     private val applyRobotSpeeds = SwerveRequest.ApplyRobotSpeeds()
     private val builder = FollowPath.Builder(
-        placeholder,
+        drive,
         placeholder,
         placeholder,
         {speeds: ChassisSpeeds ->driveSubsystem.setControl(applyRobotSpeeds.withSpeeds(speeds))},
         translationController,
         rotationController,
         crosstrackController).withDefaultShouldFlip()
-    private val intake = IntakeSubsystem(IntakeIOHardware())
-    private val lift = ArmSubsystem(ArmIOHardware())
+
     private fun autoChooser(chooser: LoggedDashboardChooser<Command>) {}
 
     fun connectToAdvantageScope() {
@@ -39,12 +38,12 @@ class BLineRoutines {
     }
     private fun registerEventTriggers() {
 
-            FollowPath.registerEventTrigger("intakeOn", intake.onCommand())
-            FollowPath.registerEventTrigger("intakeOff", intake.offCommand())
+            FollowPath.registerEventTrigger("manipUp", manip.upCommand())
+            FollowPath.registerEventTrigger("manipDown", manip.downCommand())
 
-            FollowPath.registerEventTrigger("liftL1", lift.level1Command())
-            FollowPath.registerEventTrigger("liftL2", lift.level2Command())
-            FollowPath.registerEventTrigger("liftL3", lift.level3Command())
+            FollowPath.registerEventTrigger("liftL1", arm.level1Command())
+            FollowPath.registerEventTrigger("liftL2", arm.level2Command())
+            FollowPath.registerEventTrigger("liftL3", arm.level3Command())
 
     }
     private fun twoplustwo(): Command {
@@ -74,4 +73,12 @@ class BLineRoutines {
             // score in oven x2
         )
     }
+}
+class RobotContainer {
+    private val drive = DriveSubsystem(DriveIOHardware)
+    private val manip = ManipSubsystem(ManipIOHardware)
+    private val arm = ArmSubsystem(ArmIOHardware())
+
+    private val routines = BLineRoutines(drive, manip, arm)
+    private val autoChooser = LoggedDashboardChooser<Command>("Auto Choices")
 }
