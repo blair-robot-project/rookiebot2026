@@ -1,4 +1,5 @@
 package frc.team9449.auto
+
 import com.ctre.phoenix6.swerve.SwerveRequest
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.kinematics.ChassisSpeeds
@@ -6,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import frc.robot.lib.BLine.FollowPath
 import org.littletonrobotics.junction.Logger
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
 class BLineRoutines {
     private val rotationController = PIDController(1.0, 0.0, 1.0)
@@ -20,9 +22,9 @@ class BLineRoutines {
         translationController,
         rotationController,
         crosstrackController).withDefaultShouldFlip()
-    private val intake = IntakeIO()
-    private val lift = ArmIO()
-
+    private val intake = IntakeSubsystem(IntakeIOHardware())
+    private val lift = ArmSubsystem(ArmIOHardware())
+    private fun autoChooser(chooser: LoggedDashboardChooser<Command>) {}
 
     fun connectToAdvantageScope() {
         FollowPath.setDoubleLoggingConsumer { value -> Logger.recordOutput(value.getFirst(), value.getSecond()) }
@@ -37,7 +39,7 @@ class BLineRoutines {
     }
     private fun registerEventTriggers() {
 
-            FollowPath.registerEventTrigger("intakeOn", intake.onCo mand())
+            FollowPath.registerEventTrigger("intakeOn", intake.onCommand())
             FollowPath.registerEventTrigger("intakeOff", intake.offCommand())
 
             FollowPath.registerEventTrigger("liftL1", lift.level1Command())
