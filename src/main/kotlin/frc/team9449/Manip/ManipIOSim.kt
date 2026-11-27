@@ -17,11 +17,10 @@ class ManipIOSim: ManipIOHardware() {
             ),
             DCMotor.getNEO(1),
     )
+
     override fun updateInputs(inputs: ManipIO.ManipIOInputs) {
         inputs.rollerVelo = rollerMotorSim.angularVelocityRadPerSec
         inputs.rollerVoltage = rollerMotorSim.inputVoltage
-
-
     }
 
 }
