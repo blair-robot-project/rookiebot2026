@@ -75,8 +75,21 @@ open class VisionIOPhoton(Name: String, val Offset: Transform3d) : VisionIO {
                     val robotPose = Pose3d(fieldToRobot.translation, fieldToRobot.rotation)
 
                     tags.add(target.fiducialId)
+
+                pose_observations.add(
+                    PoseObservations(
+                        robotPose,
+                        result.timestampSeconds,
+                        target.poseAmbiguity,
+                        1,
+                        cameraToRobot.translation.norm,
+                        PoseObservationType.PHOTONVISION
+                    )
+                )
                 }
             }
+            inputs.tagIds = tags.toIntArray()
+            inputs.poseObservations = pose_observations.toTypedArray()
         }
     }
 }
