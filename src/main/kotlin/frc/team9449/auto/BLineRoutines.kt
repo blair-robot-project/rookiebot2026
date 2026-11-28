@@ -23,7 +23,11 @@ class BLineRoutines(private val drive: DriveSubsystem,  private val manip: Manip
         rotationController,
         crosstrackController).withDefaultShouldFlip()
 
-    private fun autoChooser(chooser: LoggedDashboardChooser<Command>) {}
+    fun autoChooser(chooser: LoggedDashboardChooser<Command>) {
+        chooser.addDefaultOption("Do Nothing", Commands.none())
+        chooser.addOption("2+2", twoplustwo())
+        chooser.addOption("Score 4 Oven", score4oven())
+    }
 
     fun connectToAdvantageScope() {
         FollowPath.setDoubleLoggingConsumer { value -> Logger.recordOutput(value.getFirst(), value.getSecond()) }
@@ -79,6 +83,6 @@ class RobotContainer {
     private val manip = ManipSubsystem(ManipIOHardware)
     private val arm = ArmSubsystem(ArmIOHardware())
 
-    private val routines = BLineRoutines(drive, manip, arm)
-    private val autoChooser = LoggedDashboardChooser<Command>("Auto Choices")
+    val routines = BLineRoutines(drive, manip, arm)
+    val autoChooser = LoggedDashboardChooser<Command>("Auto Choices")
 }
